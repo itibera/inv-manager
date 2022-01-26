@@ -20,6 +20,17 @@ var schema = new mongoose.Schema({
     }
 })
 
-const Productdb = mongoose.model('productdb', schema);
+var saleSchema = new mongoose.Schema({
+    totalSales : {
+        type : Number,
+        required: true
+    }
+    
+})
 
-module.exports = Productdb;
+
+exports.Productdb = mongoose.model('productdb', schema);
+exports.Salesdb = mongoose.model('salesdb', saleSchema);
+
+// module.exports = Productdb;
+// module.exports = Salesdb;

@@ -44,7 +44,7 @@ a {
 }
 
 .justify-between{
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .text-center{
@@ -52,8 +52,9 @@ a {
 }
 
 .border-shadow{
-    border: 1px solid var(--border-btn);
-    box-shadow: 1px 3px 10px #e9ecef;
+    border: 1px solid lightgray;
+    box-shadow: 1px 3px 10px #e9e9e9;
+    border-radius: 8px;
 }
 
 .text-dark{
@@ -86,9 +87,13 @@ a {
     font-family: 'Barlow', sans-serif;
 }
 
-#site-main .container .box-nav > a{
+#site-main .container .box-nav > a,
+#site-main .container .box-nav > div{
     font-size: 1em;
-    padding: .5em 1em;
+    padding: 0.75em 2em;
+    border: 1px solid lightgrey;
+    border-radius: 8px;
+    box-shadow: 1px 3px 10px #e9e9e9;
 }
 
 #site-main .container form{
@@ -114,7 +119,14 @@ table{
 }
 
 .table tr:hover{
-    background-color:#06d6a0 ;
+    background-color:#fff ;
+}
+.table tr{
+    background-color: #efefef;
+}
+
+.btn:hover{
+    box-shadow: 1px 3px 12px #e5e5e5;
 }
 
 .table tr:hover td > a{

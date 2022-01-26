@@ -1,5 +1,5 @@
 
-var Productdb = require('../model/model');
+var model = require('../model/model');
 
 //create and save new product
 
@@ -10,7 +10,7 @@ exports.create = (req, res) => {
         return;
     }
     //new user
-    const product = new Productdb({
+    const product = new model.Productdb({
         name: req.body.name,
         quantity: req.body.quantity,
         price: req.body.price,
@@ -36,7 +36,7 @@ exports.find = (req, res) => {
     if (req.query.id) {
         const id = req.query.id;
 
-        Productdb.findById(id)
+        model.Productdb.findById(id)
             .then(data => {
                 if (!data) {
                     res.status(404).send({ message: "Not found product with id " + id })
@@ -49,7 +49,7 @@ exports.find = (req, res) => {
             })
 
     } else {
-        Productdb.find()
+        model.Productdb.find()
             .then(product => {
                 res.send(product)
             })
@@ -60,7 +60,39 @@ exports.find = (req, res) => {
 
 }
 
-//update a new identified product by userid
+// retrieve and return all sales product
+
+exports.findSales = (req, res) => {
+    if (req.query.id) {
+        const id = req.query.id;
+
+        model.Salesdb.findById(id)
+            .then(data => {
+                if (!data) {
+                    res.status(404).send({ message: "Not found product with id " + id })
+                } else {
+                    res.send(data)
+                }
+            })
+            .catch(err => {
+                res.status(500).send({ message: "Error retrieving product with id " + id })
+            })
+
+    } else {
+        model.Salesdb.find()
+            .then(product => {
+                res.send(product)
+            })
+            .catch(err => {
+                res.status(500).send({ message: err.message || "Error occured while retriving product information" })
+            })
+    }
+
+}
+
+
+
+//update a new identified product by productid
 
 exports.update = (req, res)=>{
     if(!req.body){
@@ -70,7 +102,7 @@ exports.update = (req, res)=>{
     }
 
     const id = req.params.id;
-    Productdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
+    model.Productdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
         .then(data => {
             if(!data){
                 res.status(404).send({ message : `Cannot Update product with ${id}. Maybe product not found!`})
@@ -83,12 +115,34 @@ exports.update = (req, res)=>{
         })
 }
 
-//delete a user with specified productid in the request
+// updateSale 
+exports.updateSales = (req, res)=>{
+    if(!req.body){
+        return res
+            .status(400)
+            .send({ message : "Data to update can not be empty"})
+    }
+
+    const id = req.params.id;
+    model.Salesdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
+        .then(data => {
+            if(!data){
+                res.status(404).send({ message : `Cannot Update product with ${id}. Maybe product not found!`})
+            }else{
+                res.send(data)
+            }
+        })
+        .catch(err =>{
+            res.status(500).send({ message : "Error Update product information"})
+        })
+}
+
+//delete a product with specified productid in the request
 
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Productdb.findByIdAndDelete(id)
+    model.Productdb.findByIdAndDelete(id)
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: `Cannot Delete with id ${id}. Maybe id is wrong` })

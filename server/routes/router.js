@@ -21,7 +21,9 @@ route.get('/update-product',services.update_product);
 
 route.post('/api/products',controller.create);
 route.get('/api/products',controller.find);
+route.get('/api/sales',controller.findSales);
 route.put('/api/products/:id',controller.update);
+route.put('/api/sales/:id',controller.updateSales);
 route.delete('/api/products/:id',controller.delete);
 
 module.exports = route

@@ -7,11 +7,16 @@
     <td><%= products[i].supplier %></td>
     <td>
       <a href="/update-product?id=<%= products[i]._id %>" class="btn border-shadow update">
-        <span class=""><i class="fas fa-pencil-alt"></i></span>
+        <span class="">Add</span>
+      </a>
+
+      <a href="#" class="btn border-shadow sell" data-id =<%= products[i]._id %>>
+        <span class="">Sell</span>
       </a>
       <a href="#" class="btn border-shadow delete" data-id =<%= products[i]._id %>>
-        <span class=""><i class="fas fa-times"></i></span>
+        <span class=""><i class="fas fa-trash"></i></span>
       </a>
     </td>
   </tr>
   <% } %>
+  
