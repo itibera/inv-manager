@@ -3,23 +3,26 @@ var products = {};
 var sales = {};
 exports.homeRoutes = async (req, res) => {
     // Make a get request to /api/users
-    await axios.get('http://localhost:3000/api/products')
-        .then(function (response) {
-            products = response.data;
-            // res.render('index', { products: response.data });
-        })
-        .catch(err => {
-            res.send(err);
-        })
-    await axios.get('http://localhost:3000/api/sales?id=61f040fa19ce5cfd39fcbb29')
-        .then(function (response) {
-            sales = response.data;
-            // res.render('index', { products: response.data });
-        })
-        .catch(err => {
-            res.send(err);
-        })
-        res.render('index', { products, sales });
+    try {
+        await axios.get('http://localhost:3000/api/products')
+            .then(function (response) {
+                products = response.data;
+                // res.render('index', { products: response.data });
+            })
+            .catch(err => {
+                res.send(err);
+            })
+
+        await axios.get('http://localhost:3000/api/sales?id=61f040fa19ce5cfd39fcbb29')
+            .then(function (response) {
+                sales = response.data;
+                // res.render('index', { products: response.data });
+            })
+            .catch(err => {
+                res.send(err);
+            })
+    } catch { }
+    res.render('index', { products, sales });
 }
 
 
