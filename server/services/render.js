@@ -21,8 +21,9 @@ exports.homeRoutes = async (req, res) => {
             .catch(err => {
                 res.send(err);
             })
+            res.render('index', { products, sales });
     } catch { }
-    res.render('index', { products, sales });
+    
 }
 
 
