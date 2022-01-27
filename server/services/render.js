@@ -4,7 +4,7 @@ var sales = {};
 exports.homeRoutes = async (req, res) => {
     // Make a get request to /api/users
     try {
-        await axios.get('http://localhost:3000/api/products')
+        await axios.get('http://nextgen-inventory.herokuapp.com/api/products')
             .then(function (response) {
                 products = response.data;
                 // res.render('index', { products: response.data });
@@ -13,7 +13,7 @@ exports.homeRoutes = async (req, res) => {
                 res.send(err);
             })
 
-        await axios.get('http://localhost:3000/api/sales?id=61f040fa19ce5cfd39fcbb29')
+        await axios.get('http://nextgen-inventory.herokuapp.com/api/sales?id=61f040fa19ce5cfd39fcbb29')
             .then(function (response) {
                 sales = response.data;
                 // res.render('index', { products: response.data });
@@ -32,7 +32,7 @@ exports.add_product = (req, res) => {
 }
 
 exports.update_product = (req, res) => {
-    axios.get('http://localhost:3000/api/products', { params: { id: req.query.id } })
+    axios.get('http://nextgen-inventory.herokuapp.com/api/products', { params: { id: req.query.id } })
         .then(function (productdata) {
             // console.log(userdata.data);
             res.render('update_product', { product: productdata.data });
