@@ -15,7 +15,7 @@ $("#update_product").submit(function (event) {
 
 
     var request = {
-        "url": `http://localhost:3000/api/products/${data.id}`,
+        "url": `http://localhost:${process.env.PORT}/api/products/${data.id}`,
         "method": "PUT",
         "data": data
     }
@@ -31,7 +31,7 @@ if (window.location.pathname == "/") {
         var id = $(this).attr("data-id")
 
         var request = {
-            "url": `http://localhost:3000/api/products/${id}`,
+            "url": `http://localhost:${process.env.PORT}/api/products/${id}`,
             "method": "DELETE"
         }
 
@@ -58,15 +58,15 @@ if (window.location.pathname == "/") {
         var productdata = {};
         var salesdata = {};
         try{
-            productdata = await doAjax(`http://localhost:3000/api/products?id=${id}`,{},"GET");
-            salesdata = await doAjax(`http://localhost:3000/api/sales?id=61f040fa19ce5cfd39fcbb29`,{},"GET")
+            productdata = await doAjax(`http://localhost:${process.env.PORT}/api/products?id=${id}`,{},"GET");
+            salesdata = await doAjax(`http://localhost:${process.env.PORT}/api/sales?id=61f040fa19ce5cfd39fcbb29`,{},"GET")
         }catch{}
         productdata.quantity = productdata.quantity - 1;
         salesdata.totalSales = salesdata.totalSales+productdata.price;
 
         try{
-            await doAjax(`http://localhost:3000/api/products/${id}`,productdata,"PUT");
-            await doAjax(`http://localhost:3000/api/sales/61f040fa19ce5cfd39fcbb29`,salesdata,"PUT");
+            await doAjax(`http://localhost:${process.env.PORT}/api/products/${id}`,productdata,"PUT");
+            await doAjax(`http://localhost:${process.env.PORT}/api/sales/61f040fa19ce5cfd39fcbb29`,salesdata,"PUT");
             alert("Product Sold Successfully!");
             location.reload();
         }catch{}
